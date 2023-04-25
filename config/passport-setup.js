@@ -6,6 +6,8 @@ const GoogleStrategy = require("passport-google-oauth20");
 passport.use(
   new GoogleStrategy({
     // google config
+    clientID:process.env.clientID,
+    clientSecret:process.env.clientSecret
   }),
   () => {
     //cb function
