@@ -1,15 +1,19 @@
 const passport = require("passport");
+const path = require("path");
 // making strategy
 const GoogleStrategy = require("passport-google-oauth20");
-
-// similar to using middleware that takes 2 parama(one is strategy and another cb)
+require("dotenv").config({path:path.resolve(__dirname, "../.env")})
 passport.use(
-  new GoogleStrategy({
-    // google config
-    clientID:process.env.clientID,
-    clientSecret:process.env.clientSecret
-  }),
-  () => {
-    //cb function
-  }
+  // similar to using middleware that takes 2 parama(one is strategy configuration and another cb)
+  new GoogleStrategy(
+    {
+      // google config
+      callbackURL: "/auth/google/redirect",
+      clientID: process.env.CLIENTID,
+      clientSecret: process.env.CLIENTSECRET,
+    },
+    () => {
+      //cb function
+    }
+  )
 );

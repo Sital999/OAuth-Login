@@ -3,6 +3,9 @@ const express = require("express");
 // creating express application using express(top level function)
 const app = express();
 
+// importing passport
+const passportSetup = require("./config/passport-setup");
+
 // importing all environment variables
 require("dotenv").config();
 
@@ -18,7 +21,6 @@ app.use("/auth", require("./routes"));
 app.get("/", (req, res) => {
   res.render("Home");
 });
-
 
 // listening on port 8000
 app.listen(port, () => {
