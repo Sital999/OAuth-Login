@@ -5,6 +5,18 @@ const User = require("../models/userModels");
 const GoogleStrategy = require("passport-google-oauth20");
 require("dotenv").config({ path: path.resolve(__dirname, "../.env") });
 
+// serializing User
+passport.serializeUser((user,done)=>{
+    done(null,user.id);
+})
+
+// deserialize user
+passport.deserializeUser((id,done)=>{
+    User.findById(id).then((user)=>{
+      done(null,user)
+    })
+})
+
 passport.use(
   // similar to using middleware that takes 2 parama(one is strategy configuration and another cb)
   new GoogleStrategy(
@@ -18,6 +30,7 @@ passport.use(
       // check if user already exists
       User.findOne({ googleId: profile.id }).then((currentUser) => {
         if (currentUser) {
+          done(null,currentUser)
           console.log("User already exits");
         } else {
           new User({
@@ -25,8 +38,9 @@ passport.use(
             googleId: profile.id,
           })
             .save()
-            .then((userName) => {
-              console.log("user " + userName + " is connected to mongo db.");
+            .then((newUser) => {
+              done(null, newUser);
+              console.log("user " + newUser + " is connected to mongo db.");
             });
         }
       });
