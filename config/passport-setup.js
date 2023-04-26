@@ -1,6 +1,7 @@
 const passport = require("passport");
 const path = require("path");
 const User = require("../models/userModels");
+
 // making strategy
 const GoogleStrategy = require("passport-google-oauth20");
 require("dotenv").config({ path: path.resolve(__dirname, "../.env") });
