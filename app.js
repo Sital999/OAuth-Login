@@ -3,11 +3,17 @@ const express = require("express");
 // creating express application using express(top level function)
 const app = express();
 
-// importing passport
+// importing passport for connecting with google
 const passportSetup = require("./config/passport-setup");
 
 // importing all environment variables
 require("dotenv").config();
+
+
+// connection with mongoose
+const mongoose = require("mongoose");
+
+mongoose.connect(process.env.MONGO_URI)
 
 const port = process.env.PORT || 8000;
 
