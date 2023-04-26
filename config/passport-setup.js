@@ -12,8 +12,10 @@ passport.use(
       clientID: process.env.CLIENTID,
       clientSecret: process.env.CLIENTSECRET,
     },
-    () => {
+    (accessToken, refreshToken,profile,done) => {
       //cb function
+      console.log(profile)
+      console.log("accessToken: " ,accessToken,refreshToken)
     }
   )
 );
