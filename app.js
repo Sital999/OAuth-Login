@@ -6,14 +6,11 @@ const app = express();
 // importing passport for connecting with google
 const passportSetup = require("./config/passport-setup");
 
+// connection with mongoose
+const mongoose = require("./config/mongo-setup")
+
 // importing all environment variables
 require("dotenv").config();
-
-
-// connection with mongoose
-const mongoose = require("mongoose");
-
-mongoose.connect(process.env.MONGO_URI)
 
 const port = process.env.PORT || 8000;
 
